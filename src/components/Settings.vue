@@ -4,17 +4,20 @@
       <Followings/>
     </el-tab-pane>
     <el-tab-pane label="Уведомления" name="notifications">
-      Уведомления
+      <Notifications/>
     </el-tab-pane>
   </el-tabs>
 </template>
 
 <script>
 import Followings from './Followings';
+import Notifications from './Notifications';
+
 export default {
   name: 'Settings',
   components: {
     Followings,
+    Notifications,
   },
   data() {
       return {
