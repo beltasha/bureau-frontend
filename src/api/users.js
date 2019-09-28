@@ -1,4 +1,5 @@
 import http from '../http';
+import { setAuthHeader } from '../http';
 
 const savedUsersMock = [
   {
@@ -126,5 +127,27 @@ export default {
         resolve(userId);
       }, 1000);
     });
+  },
+  login({code, client_id, redirect_id}) {
+    return http.post('user/addupdatevkuser', {code, client_id, redirect_id})
+      .then(() => {
+        console.log('success');
+      });
+    // return new Promise((resolve) => {
+    //   setTimeout(() => {
+    //     resolve();
+    //   }, 1000);
+    // });
+  },
+  register(email, password) {
+    return http.post('user/registration', {email, password})
+      .then((token) => {
+        setAuthHeader(token);
+      });
+    // return new Promise((resolve) => {
+    //   setTimeout(() => {
+    //     resolve();
+    //   }, 1000);
+    // });
   },
 }

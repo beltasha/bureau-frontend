@@ -12,6 +12,8 @@
 <script>
 import Followings from './Followings';
 import Notifications from './Notifications';
+import vkApi from '../api/vk';
+import userApi from '../api/users';
 
 export default {
   name: 'Settings',
@@ -21,11 +23,24 @@ export default {
   },
   data() {
       return {
-        activeName: 'followings'
+        activeName: 'followings',
+        phone: '',
       };
     },
-    methods: {
+  mounted() {
+    const hashParams = this.$route.hash.split('&');
+    if (!hashParams[0]) {
+      return;
     }
+    const accessToken = hashParams[0].split('=')[1];
+    const expiresIn = hashParams[1].split('=')[1];
+    const userId = hashParams[2].split('=')[1];
+    localStorage.setItem('token', accessToken);
+
+    this.$router.push('/settings');
+
+    userApi.login(accessToken);
+  }
 }
 </script>
 

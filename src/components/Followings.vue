@@ -64,9 +64,19 @@ export default {
       return this.isLoadingThirdPartyUsers || this.isLoadingSavedUsers;
     }
   },
-  created() {
+  mounted() {
+    const hashParams = this.$route.hash.split('&');
+    if (!hashParams[0]) {
+      return;
+    }
+    const accessToken = hashParams[0].split('=')[1];
+    const expiresIn = hashParams[1].split('=')[1];
+    const userId = hashParams[2].split('=')[1];
+    localStorage.setItem('token', accessToken);
+
     this.isLoadingThirdPartyUsers = true;
     this.isLoadingSavedUsers = true;
+
     userApi.fetchAllUsers(this.searchText)
       .then(({savedUsers, thirdPartyUsers}) => {
           this.savedUsers = savedUsers;
