@@ -6,7 +6,11 @@
         <i v-if="!isCollapse" class="icon el-icon-d-arrow-left" @click="isCollapse = !isCollapse"></i>
       </div>
 
-      <el-menu default-active="1" class="el-menu-vertical-demo" :collapse="isCollapse">
+      <el-menu
+        class="el-menu-vertical-demo" 
+        :collapse="isCollapse"
+        :default-active=activeIndex
+      >
         <router-link to="/feed">
           <el-menu-item index="1">
             <i class="el-icon-news"></i>
@@ -34,13 +38,22 @@ export default {
   name: 'app',
   data() {
     return {
-      isCollapse: true
+      isCollapse: true,
+      activeTab: "1",
     };
+  },
+  props: {
+    activeIndex() {
+      return this.$route.path === 'feed' ? '1' : '2';
+    },
   },
 }
 </script>
 
 <style>
+body {
+  margin-right: 0;
+}
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

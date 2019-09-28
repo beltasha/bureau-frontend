@@ -1,7 +1,7 @@
 <template>
   <el-tabs v-model="activeName" class="tabs">
     <el-tab-pane label="Подписки" name="followings">
-      Подписки
+      <Followings/>
     </el-tab-pane>
     <el-tab-pane label="Уведомления" name="notifications">
       Уведомления
@@ -10,8 +10,12 @@
 </template>
 
 <script>
+import Followings from './Followings';
 export default {
   name: 'Settings',
+  components: {
+    Followings,
+  },
   data() {
       return {
         activeName: 'followings'
