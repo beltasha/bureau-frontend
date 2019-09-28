@@ -19,7 +19,7 @@ export default {
     // const userId = hashParams[2].split('=')[1];
     // localStorage.setItem('token', accessToken);
     debugger
-    userApi.login({code, client_id: process.env.VUE_APP_VK_APP_ID, redirect_uri: process.env.VUE_APP_VK_REDIRECT_URL})
+    userApi.login({code, clientId: process.env.VUE_APP_VK_APP_ID, redirectId: process.env.VUE_APP_VK_REDIRECT_URL})
       .then(() => {
         this.$router.push('/settings');
       });

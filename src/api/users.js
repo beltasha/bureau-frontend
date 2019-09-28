@@ -128,8 +128,8 @@ export default {
       }, 1000);
     });
   },
-  login({code, client_id, redirect_id}) {
-    return http.post('user/addupdatevkuser', {code, client_id, redirect_id})
+  login({code, clientId, redirectId}) {
+    return http.post('user/addupdatevkuser', {code, clientId, redirectId})
       .then(() => {
         console.log('success');
       });
