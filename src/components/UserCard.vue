@@ -14,7 +14,7 @@
         icon="el-icon-user-solid"
       />
       <div class="user-info">
-        {{name}}
+        {{name}} {{lastName}}
         <!-- <div>{{name}}</div> -->
         <!-- <a
             v-for="accountUrl of accountUrls"
@@ -77,6 +77,10 @@ export default {
       default: '',
     },
     sosialNetworkType: {
+      type: String,
+      default: '',
+    },
+    lastName: {
       type: String,
       default: '',
     },

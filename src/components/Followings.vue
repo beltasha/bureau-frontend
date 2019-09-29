@@ -15,7 +15,8 @@
             v-for="user of thirdPartyUsers"
             :key=user.id
             :avatar-url=user.photoUrl
-            :name=user.name
+            :name=user.firstName
+            :last-name=user.lastName
             :id=user.id
             :account-urls=[user.accountUrl]
             :social-network-type=user.socialNetworkType
@@ -27,7 +28,8 @@
             v-for="user of savedUsers"
             :key=user.id
             :avatar-url=user.photoUrl
-            :name=user.name
+            :name=user.firstName
+            :last-name=user.lastName
             :id=user.id
             :account-urls=[user.accountUrl]
             :social-network-type=user.socialNetworkType
