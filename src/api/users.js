@@ -73,7 +73,7 @@ export default {
       });
     }
 
-    return http.post('users/search', { text: search });
+    return http.post('users/search', { text: search, token: localStorage.getItem('token') });
     // return new Promise((resolve) => {
     //   setTimeout(() => {
     //     resolve({data: foundUsersMock});
@@ -113,7 +113,7 @@ export default {
       });
   },
   addUser(user) {
-    return http.post('users/save', user);
+    return http.post('users/save', {user, token: localStorage.getItem('token')});
     // return new Promise((resolve) => {
     //   setTimeout(() => {
     //     resolve({data: user});
@@ -121,7 +121,7 @@ export default {
     // });
   },
   removeUser(userId) {
-    return http.remove('users', userId);
+    return http.remove('users', {userId, token: localStorage.getItem('token')});
     // return new Promise((resolve) => {
     //   setTimeout(() => {
     //     resolve(userId);
@@ -130,16 +130,20 @@ export default {
   },
   login({code, clientId, redirectId}) {
     return http.post('user/addupdatevkuser', {code, clientId, redirectId})
-      .then(() => {
-        console.log('success');
+      .then(({data}) => {
+        localStorage.setItem('token', data.token);
+        localStorage.setItem('userId', data.id);
       });
   },
   updatePhone(phone) {
-    return http.post('user/updatephone', phone)
+    return http.post('user/updatephone', { phone, userId: localStorage.getItem('userId') })
       .then(() => {
         console.log('success');
       });
   },
+  fetchPosts() {
+    return http.post('user/get-posts', {token});
+  }
   // register(email, password) {
   //   return http.post('user/registration', {email, password})
   //     .then((token) => {
