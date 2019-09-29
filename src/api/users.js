@@ -53,16 +53,16 @@ const hasSubstring = (stringRaw, substringRaw) => {
 
 export default {
   fetchSavedUsers(search='') {
-    // return http.get('users');
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve({data: savedUsersMock});
-      }, 1000);
-    })
-    .then(({data: users}) => {
-      const filteredUsers = users.filter(user => hasSubstring(user.name, search));
-      return {data: filteredUsers}
-    });
+    // return new Promise((resolve) => {
+    //   setTimeout(() => {
+    //     resolve({data: savedUsersMock});
+    //   }, 1000);
+    // })
+    return http.get('users/saved')
+      .then(({data: users}) => {
+        const filteredUsers = users.filter(user => hasSubstring(user.name, search));
+        return {data: filteredUsers}
+      });
   },
   fetchThirdPartyUsers(search='') {
     if (!search) {
@@ -73,12 +73,12 @@ export default {
       });
     }
 
-    // return http.post('users/search', { text: search });
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve({data: foundUsersMock});
-      }, 1000);
-    });
+    return http.post('users/search', { text: search });
+    // return new Promise((resolve) => {
+    //   setTimeout(() => {
+    //     resolve({data: foundUsersMock});
+    //   }, 1000);
+    // });
   },
   fetchAllUsers(search='') {
     return Promise.all([this.fetchSavedUsers(search), this.fetchThirdPartyUsers(search)])
@@ -113,41 +113,42 @@ export default {
       });
   },
   addUser(user) {
-    // return http.post('users', user);
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve({data: user});
-      }, 1000);
-    });
+    return http.post('users/save', user);
+    // return new Promise((resolve) => {
+    //   setTimeout(() => {
+    //     resolve({data: user});
+    //   }, 1000);
+    // });
   },
   removeUser(userId) {
-    // return http.remove('users', userId);
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(userId);
-      }, 1000);
-    });
+    return http.remove('users', userId);
+    // return new Promise((resolve) => {
+    //   setTimeout(() => {
+    //     resolve(userId);
+    //   }, 1000);
+    // });
   },
   login({code, clientId, redirectId}) {
     return http.post('user/addupdatevkuser', {code, clientId, redirectId})
       .then(() => {
         console.log('success');
       });
-    // return new Promise((resolve) => {
-    //   setTimeout(() => {
-    //     resolve();
-    //   }, 1000);
-    // });
   },
-  register(email, password) {
-    return http.post('user/registration', {email, password})
-      .then((token) => {
-        setAuthHeader(token);
+  updatePhone(phone) {
+    return http.post('user/updatephone', phone)
+      .then(() => {
+        console.log('success');
       });
-    // return new Promise((resolve) => {
-    //   setTimeout(() => {
-    //     resolve();
-    //   }, 1000);
-    // });
   },
+  // register(email, password) {
+  //   return http.post('user/registration', {email, password})
+  //     .then((token) => {
+  //       setAuthHeader(token);
+  //     });
+  //   // return new Promise((resolve) => {
+  //   //   setTimeout(() => {
+  //   //     resolve();
+  //   //   }, 1000);
+  //   // });
+  // },
 }

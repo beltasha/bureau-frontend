@@ -14,15 +14,16 @@
         icon="el-icon-user-solid"
       />
       <div class="user-info">
-        <div>{{name}}</div>
-        <a
+        {{name}}
+        <!-- <div>{{name}}</div> -->
+        <!-- <a
             v-for="accountUrl of accountUrls"
             :key="accountUrl"
             :href="accountUrl" 
             class="account-url"
         >
           {{accountUrl}}
-        </a>
+        </a> -->
       </div>
     </div>
     <el-button 
@@ -41,6 +42,21 @@
     >
       Добавить
     </el-button>
+    <img
+        class="avatar"
+        width="16" 
+        src="VK_Blue_Logo_transparent.png"
+    />
+    <img
+        class="avatar"
+        width="16" 
+        src="f_logo_RGB-Grey_58.png"
+    />
+    <img
+        class="avatar"
+        width="16" 
+        src="237-2378905_ig-png-logo-svg-transparent-instagram-logo-png.png"
+    />
   </el-card>
 </template>
 
@@ -65,7 +81,7 @@ export default {
       default: '',
     },
     id: {
-      type: Number,
+      type: Number | String,
       required: true,
     },
     canRemove: Boolean,
@@ -103,6 +119,7 @@ a.account-url {
 
 .user-info-container {
   display: flex;
+  align-items: center;
   flex: 1;
 }
 
@@ -113,5 +130,6 @@ a.account-url {
 
 .user-card:hover .user-card-button {
   display: block;
+  margin-right: 10px;
 }
 </style>
