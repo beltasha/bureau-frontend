@@ -32,9 +32,6 @@
                 {{post.text.slice(0, 150)}}
                 <el-button type="text" @click="isOpen = true">Показать больше</el-button>
               </div>
-              <div>
-                <img v-for="(image, index) in post.images" :key="index" :src="image" width="150px"/>
-              </div>
             </template>
 
             <template v-if="(post.text.length > 150 || post.images.length) && isOpen">
@@ -77,7 +74,7 @@ import usersApi from '../api/users';
 export default {
   data() {
     return { 
-      posts,
+      // posts,
       isOpen: false,
       searchText: '',
       isOnlyStarred: false,
@@ -92,9 +89,9 @@ export default {
     }
   },
   created() {
-    // usersApi.fetchPosts().then(({data}) => {
-    //   console.log(data)
-    // });
+    usersApi.fetchPosts().then(({data}) => {
+      this.posts = data;
+    });
 
   }
 }
@@ -115,7 +112,7 @@ main {
 }
 
 article {
-  min-width: 700px;
+  max-width: 700px;
   display: flex;
   flex-direction: column;
 }
