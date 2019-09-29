@@ -28,14 +28,14 @@
               <!-- <i class="el-icon-star-on box-card-header-star" /> -->
             </div>
             <template v-if="(post.text.length > 150 || post.images.length) && !isOpen">
-              <div class="text">
+              <div class="text" v-linkified>
                 {{post.text.slice(0, 150)}}
                 <el-button type="text" @click="isOpen = true">Показать больше</el-button>
               </div>
             </template>
 
             <template v-if="(post.text.length > 150 || post.images.length) && isOpen">
-              <div class="text">
+              <div class="text" v-linkified>
                 {{post.text}}
                 <el-button type="text" @click="isOpen = false">Скрыть</el-button>
               </div>
