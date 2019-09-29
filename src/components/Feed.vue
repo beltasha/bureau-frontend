@@ -74,7 +74,7 @@ import usersApi from '../api/users';
 export default {
   data() {
     return { 
-      posts,
+      posts: [],
       isOpen: false,
       searchText: '',
       isOnlyStarred: false,
