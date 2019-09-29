@@ -142,7 +142,7 @@ export default {
       });
   },
   fetchPosts() {
-    return http.post('user/get-posts', {token: localStorage.getItem('token')});
+    return http.post('users/get-posts', {token: localStorage.getItem('token')});
   }
   // register(email, password) {
   //   return http.post('user/registration', {email, password})
